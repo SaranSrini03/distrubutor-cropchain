@@ -1,27 +1,62 @@
-// components/StatusBadge.tsx
-interface StatusBadgeProps {
+// app/products/component/ProductTable.tsx
+"use client";
+
+interface Product {
+  id: number;
+  name: string;
+  farmer: string;
   status: string;
+  action: string;
 }
 
-function StatusBadge({ status }: StatusBadgeProps) {
-  const getStatusConfig = (status: string) => {
-    const config = {
-      completed: { color: "bg-green-100 text-green-800 border-green-200", label: "Completed" },
-      pending: { color: "bg-yellow-100 text-yellow-800 border-yellow-200", label: "Pending" },
-      active: { color: "bg-blue-100 text-blue-800 border-blue-200", label: "Active" },
-      cancelled: { color: "bg-red-100 text-red-800 border-red-200", label: "Cancelled" },
-      default: { color: "bg-gray-100 text-gray-800 border-gray-200", label: status }
-    };
+interface ProductTableProps {
+  products: Product[];
+  onView: (product: Product) => void;
+  onEdit: (product: Product) => void;
+}
 
-    return config[status as keyof typeof config] || config.default;
-  };
-
-  const { color, label } = getStatusConfig(status.toLowerCase());
-
+export default function ProductTable({ products, onView, onEdit }: ProductTableProps) {
   return (
-    <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${color}`}>
-      <span className="w-2 h-2 rounded-full bg-current mr-2 opacity-70"></span>
-      {label}
-    </span>
+    <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-gray-50">
+        <tr>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Name
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Farmer
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Status
+          </th>
+          <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody className="bg-white divide-y divide-gray-200">
+        {products.map((product) => (
+          <tr key={product.id}>
+            <td className="px-6 py-4 whitespace-nowrap">{product.name}</td>
+            <td className="px-6 py-4 whitespace-nowrap">{product.farmer}</td>
+            <td className="px-6 py-4 whitespace-nowrap">{product.status}</td>
+            <td className="px-6 py-4 whitespace-nowrap text-right flex justify-end gap-2">
+              <button
+                onClick={() => onView(product)}
+                className="px-3 py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
+              >
+                View
+              </button>
+              <button
+                onClick={() => onEdit(product)}
+                className="px-3 py-1 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all"
+              >
+                Edit
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 }
