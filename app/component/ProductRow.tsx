@@ -52,14 +52,7 @@ export default function ProductRow({ product, onView, onEdit }: ProductRowProps)
           >
             VIEW
           </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="font-mono text-xs h-8 px-3 text-green-700 hover:bg-green-100"
-            onClick={() => onEdit?.(product)}
-          >
-            EDIT
-          </Button>
+
         </div>
       </TableCell>
     </TableRow>

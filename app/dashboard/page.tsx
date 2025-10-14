@@ -48,7 +48,6 @@ export default function ProductsPage() {
   };
 
   const handleView = (product: typeof selectedProduct) => setSelectedProduct(product);
-  const handleEdit = (product: typeof selectedProduct) => console.log("EDIT", product?.id);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 font-mono flex flex-col">
@@ -133,7 +132,6 @@ export default function ProductsPage() {
               <ProductTable
                 products={filteredProducts}
                 onView={handleView}
-                onEdit={handleEdit}
               />
             </div>
           ) : (

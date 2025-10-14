@@ -7,7 +7,7 @@ interface ProductTableProps {
   onEdit?: (product: ProductItem) => void;
 }
 
-export default function ProductTable({ products, onView, onEdit }: ProductTableProps) {
+export default function ProductTable({ products, onView }: ProductTableProps) {
   return (
     <div className="border border-green-200 rounded-lg shadow-sm overflow-hidden">
       <Table>
@@ -21,7 +21,7 @@ export default function ProductTable({ products, onView, onEdit }: ProductTableP
         </TableHeader>
         <TableBody>
           {products.map((product) => (
-            <ProductRow key={product.id} product={product} onView={onView} onEdit={onEdit} />
+            <ProductRow key={product.id} product={product} onView={onView} />
           ))}
         </TableBody>
       </Table>
