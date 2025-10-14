@@ -34,24 +34,58 @@ export default function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-green-50 font-mono flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 font-mono flex flex-col">
       <Head>
         <title>Products</title>
         <meta name="description" content="Products management" />
       </Head>
 
-      <div className="w-full max-w-6xl px-4 py-6">
-        <HeaderBar
-          searchTerm={searchTerm}
-          onSearchTermChange={setSearchTerm}
-          onOpenQR={() => setIsQROpen(true)}
-        />
+      {/* Header Section */}
+      <header className="w-full bg-gradient-to-r from-green-600 to-emerald-500 shadow-lg">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-white tracking-wide">
+            🌾 Product Management
+          </h1>
+          <button
+            onClick={() => setIsQROpen(true)}
+            className="px-4 py-2 bg-white text-green-700 font-semibold rounded-xl shadow-sm hover:bg-green-100 transition-all"
+          >
+            📱 Show QR
+          </button>
+        </div>
+      </header>
 
-        <ProductTable products={filteredProducts} onView={handleView} onEdit={handleEdit} />
-        <EmptyState visible={filteredProducts.length === 0} />
+      {/* Main Content */}
+      <main className="flex-grow flex justify-center items-start py-8 px-4">
+        <div className="w-full max-w-6xl bg-white rounded-3xl shadow-xl p-6 md:p-8 transition-all duration-300 hover:shadow-2xl">
+          {/* Header Bar */}
+          <div className="mb-6">
+            <HeaderBar
+              searchTerm={searchTerm}
+              onSearchTermChange={setSearchTerm}
+              onOpenQR={() => setIsQROpen(true)}
+            />
+          </div>
 
-        <FooterCount filtered={filteredProducts.length} total={products.length} />
-      </div>
+          {/* Product Table or Empty State */}
+          {filteredProducts.length > 0 ? (
+            <div className="overflow-x-auto rounded-xl border border-gray-200">
+              <ProductTable
+                products={filteredProducts}
+                onView={handleView}
+                onEdit={handleEdit}
+              />
+            </div>
+          ) : (
+            <EmptyState visible={true} />
+          )}
+
+          {/* Footer */}
+          <div className="mt-6 border-t pt-4">
+            <FooterCount filtered={filteredProducts.length} total={products.length} />
+          </div>
+        </div>
+      </main>
 
       {/* QR Popup */}
       <QRPopup
@@ -59,6 +93,11 @@ export default function ProductsPage() {
         onClose={() => setIsQROpen(false)}
         qrData="https://cropchain.example.com"
       />
+
+      {/* Footer Bar */}
+      <footer className="text-center text-sm py-4 text-gray-500 bg-green-50">
+        © {new Date().getFullYear()} CropChain — Built with 🌿
+      </footer>
     </div>
   );
 }
