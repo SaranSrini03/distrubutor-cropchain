@@ -1,6 +1,6 @@
 // app/products/component/popup/ProductModal.tsx
 "use client";
-import { X, Leaf, User, CheckCircle, AlertCircle } from "lucide-react";
+import { AlertCircle, CheckCircle, Leaf, User, X } from "lucide-react";
 
 interface Product {
   id: number;
@@ -140,14 +140,18 @@ export default function ProductModal({ product, onClose }: ProductModalProps) {
           )}
         </div>
 
-        {/* Footer */}
         <div className="bg-gray-50 px-6 py-4 flex gap-3 border-t border-gray-200">
           <button
             onClick={onClose}
             className="flex-1 px-4 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
           >
             Done
-          </button>2a43s5d6g8uj9ik0o-p[=\
+          </button>
+          <button
+            className="flex-1 px-4 py-2.5 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5"
+          >
+            add details
+          </button>
         </div>
       </div>
     </div>
